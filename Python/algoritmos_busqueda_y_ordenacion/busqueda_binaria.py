@@ -1,6 +1,21 @@
 import random
 
-def busqueda_binaria(lista, comienzo, final, objetivo):
+
+def busqueda_binaria(lista, objetivo):
+  inicio = 0
+  fin = len(lista) - 1
+  while inicio <= fin:
+    medio = (inicio + fin) // 2
+
+    if lista[medio] == objetivo:
+      return medio  # Índice del objetivo buscado
+    elif lista[medio] < objetivo:
+      inicio = medio + 1
+    else:
+      fin = medio - 1
+  pass
+
+def busqueda_binaria_recursiva(lista, comienzo, final, objetivo):
 
   if comienzo > final:
     return False
@@ -10,9 +25,9 @@ def busqueda_binaria(lista, comienzo, final, objetivo):
   if lista[medio] == objetivo:
     return True
   elif lista[medio] < objetivo:
-    return busqueda_binaria(lista, medio + 1, final, objetivo)
+    return busqueda_binaria_recursiva(lista, medio + 1, final, objetivo)
   else: 
-    return busqueda_binaria(lista, comienzo, medio - 1, objetivo)
+    return busqueda_binaria_recursiva(lista, comienzo, medio - 1, objetivo)
 
 
 if __name__ == '__main__':
@@ -25,7 +40,7 @@ if __name__ == '__main__':
   lista = sorted([random.randint(0,100) for i in range(tamano_lista)])
 
   # ejecutamos función de busqueda
-  encontrado = busqueda_binaria(lista, 0, len(lista), objetivo)
+  encontrado = busqueda_binaria_recursiva(lista, 0, len(lista), objetivo)
   
 
   print(lista)
